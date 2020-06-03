@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+  <script>
+    //get all hands class from the html
+
+    const hourHand = document.querySelector('.hour-hand');
+    const minuteHand = document.querySelector('.min-hand');
+    const secondHand = document.querySelector('.second-hand');
+
+    function setTime() {
+      const currentDate = new Date();
+
+      const seconds = currentDate.getSeconds(); //get the current seconds from the date function
+      const secondsRotate = ((seconds/60) *360) + 90; 
+      //get the seconds and divide by the totoal number of seconds that make a minute and 
+      //multiply by the tital angle 360. Add 90 to overrride the default 90deg on css.
+      secondHand.style.transform = `rotate(${secondsRotate}deg)`; // add transform style to rotate the second hand.
+
+      const minutes = currentDate.getMinutes(); //gets the current minute
+      const minutesRotate = ((minutes/60) * 360) + 90; 
+      //divides the minute by the total number of minutes that make an hour adn mutliplies by a full rotation of 360deg
+      // adds result to 90 to get a perfect angle
+      minuteHand.style.transform = `rotate(${minutesRotate}deg)`;
+
+       const hour = currentDate.getHours();
+       const hourRotate = ((hour/12) *360)  + 90;
+       hourHand.style.transform = `rotate(${hourRotate}deg)`;
+
+    }
+    setInterval(setTime, 1000);
+    setTime();
+  </script>
+</body>
+</html>
